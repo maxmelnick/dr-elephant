@@ -7,6 +7,49 @@
 
 **Dr. Elephant** is a performance monitoring and tuning tool for Hadoop and Spark. It automatically gathers all the metrics, runs analysis on them, and presents them in a simple way for easy consumption. Its goal is to improve developer productivity and increase cluster efficiency by making it easier to tune the jobs. It analyzes the Hadoop and Spark jobs using a set of pluggable, configurable, rule-based heuristics that provide insights on how a job performed, and then uses the results to make suggestions about how to tune the job to make it perform more efficiently.
 
+## Configuring on EMR
+
+1. Provision EMR cluster
+2. Provision MySQL RDS instance and open port 3060 from EMR master
+3. Add Security Group to EMR Master to enable port 8080 traffic for Dr Elephant UI (other ports that might be helpful: 18080 = Spark History Server UI, 8890 = Zeppelin)
+4. SSH into Master and install Dr Elephant per [quick setup](https://github.com/linkedin/dr-elephant/wiki/Quick-Setup-Instructions-(Must-Read))
+
+**HINTS**
+
+```
+cd ~
+wget https://downloads.typesafe.com/typesafe-activator/1.3.12/typesafe-activator-1.3.12.zip
+unzip typesafe-activator-1.3.12.zip
+export ACTIVATOR_HOME=/home/hadoop/activator-dist-1.3.12
+export PATH=$ACTIVATOR_HOME/bin:$PATH
+
+sudo yum install nodejs npm --enablerepo=epel
+sudo npm config set registry http://registry.npmjs.org/
+sudo npm install -g bower
+
+git clone https://github.com/maxmelnick/dr-elephant.git
+cd dr-elephant/web/
+bower install
+
+export HADOOP_HOME=/usr/lib/hadoop
+export SPARK_HOME=/usr/lib/spark
+export SPARK_CONF_DIR=/usr/lib/spark/conf
+export PATH=$HADOOP_HOME/bin:$PATH
+export HADOOP_CONF_DR=/etc/hadoop/conf
+export $HADOOP_CONF_DIR=/etc/hadoop/conf
+export HADOOP_CONF_DIR=/etc/hadoop/conf
+
+cd ..
+./compile.sh
+
+vim ~/dr-elephant/app-conf/elephant.conf
+
+cd dist/dr-elephant-2.1.7
+./bin/start.sh ~/dr-elephant/app-conf
+
+less ~/dr-elephant/dist/logs/elephant/dr_elephant.log
+```
+
 ## Documentation
 
 For more information on Dr. Elephant, check the wiki pages [here](https://github.com/linkedin/dr-elephant/wiki).
