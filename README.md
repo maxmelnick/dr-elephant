@@ -50,6 +50,44 @@ cd dist/dr-elephant-2.1.7
 less ~/dr-elephant/dist/logs/elephant/dr_elephant.log
 ```
 
+Existing error:
+```
+09-24-2018 02:17:46 ERROR [dr-el-executor-thread-1] com.linkedin.drelephant.ElephantRunner : java.lang.IllegalArgumentException: java
+.net.UnknownHostException: null
+        at org.apache.hadoop.security.SecurityUtil.buildTokenService(SecurityUtil.java:418)
+        at org.apache.hadoop.security.SecurityUtil.buildTokenService(SecurityUtil.java:435)
+        at org.apache.hadoop.hdfs.web.WebHdfsFileSystem.initialize(WebHdfsFileSystem.java:239)
+        at org.apache.hadoop.fs.FileSystem.createFileSystem(FileSystem.java:2859)
+        at org.apache.hadoop.fs.FileSystem.access$200(FileSystem.java:99)
+        at org.apache.hadoop.fs.FileSystem$Cache.getInternal(FileSystem.java:2896)
+        at org.apache.hadoop.fs.FileSystem$Cache.get(FileSystem.java:2878)
+        at org.apache.hadoop.fs.FileSystem.get(FileSystem.java:392)
+        at com.linkedin.drelephant.util.SparkUtils$class.fileSystemAndPathForEventLogDir(SparkUtils.scala:70)
+        at com.linkedin.drelephant.util.SparkUtils$.fileSystemAndPathForEventLogDir(SparkUtils.scala:312)
+        at org.apache.spark.deploy.history.SparkFSFetcher.doFetchData(SparkFSFetcher.scala:84)
+        at org.apache.spark.deploy.history.SparkFSFetcher$$anonfun$fetchData$1.apply(SparkFSFetcher.scala:74)
+        at org.apache.spark.deploy.history.SparkFSFetcher$$anonfun$fetchData$1.apply(SparkFSFetcher.scala:74)
+        at org.apache.spark.deploy.history.SparkFSFetcher$$anon$1.run(SparkFSFetcher.scala:78)
+        at java.security.AccessController.doPrivileged(Native Method)
+        at javax.security.auth.Subject.doAs(Subject.java:360)
+        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1820)
+        at com.linkedin.drelephant.security.HadoopSecurity.doAs(HadoopSecurity.java:109)
+        at org.apache.spark.deploy.history.SparkFSFetcher.doAsPrivilegedAction(SparkFSFetcher.scala:78)
+        at org.apache.spark.deploy.history.SparkFSFetcher.fetchData(SparkFSFetcher.scala:74)
+        at com.linkedin.drelephant.spark.fetchers.FSFetcher.fetchData(FSFetcher.scala:34)
+        at com.linkedin.drelephant.spark.fetchers.FSFetcher.fetchData(FSFetcher.scala:29)
+        at com.linkedin.drelephant.analysis.AnalyticJob.getAnalysis(AnalyticJob.java:247)
+        at com.linkedin.drelephant.ElephantRunner$ExecutorJob.run(ElephantRunner.java:175)
+        at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+        at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+        at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.UnknownHostException: null
+        ... 29 more
+
+```
+
 ## Documentation
 
 For more information on Dr. Elephant, check the wiki pages [here](https://github.com/linkedin/dr-elephant/wiki).
