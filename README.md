@@ -23,10 +23,11 @@ unzip typesafe-activator-1.3.12.zip
 export ACTIVATOR_HOME=/home/hadoop/activator-dist-1.3.12
 export PATH=$ACTIVATOR_HOME/bin:$PATH
 
-sudo yum install nodejs npm --enablerepo=epel
+sudo yum install nodejs npm --enablerepo=epel -y
 sudo npm config set registry http://registry.npmjs.org/
 sudo npm install -g bower
 
+sudo yum install git -y
 git clone https://github.com/maxmelnick/dr-elephant.git
 cd dr-elephant
 git checkout emrInstall
