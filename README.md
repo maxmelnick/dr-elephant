@@ -11,7 +11,7 @@
 
 1. Provision EMR cluster
 2. Provision MySQL RDS instance and open port 3060 from EMR master
-3. Add Security Group to EMR Master to enable port 8080 traffic for Dr Elephant UI (other ports that might be helpful: 18080 = Spark History Server UI, 8890 = Zeppelin)
+3. Add Security Group to EMR Master to enable 1) Internal SSH from bastion, 2) port 8080 traffic for Dr Elephant UI, 3) 18080 = Spark History Server UI, 4) 8890 = Zeppelin
 4. SSH into Master and install Dr Elephant per [quick setup](https://github.com/linkedin/dr-elephant/wiki/Quick-Setup-Instructions-(Must-Read))
 
 **HINTS**
@@ -28,7 +28,9 @@ sudo npm config set registry http://registry.npmjs.org/
 sudo npm install -g bower
 
 git clone https://github.com/maxmelnick/dr-elephant.git
-cd dr-elephant/web/
+cd dr-elephant
+git checkout emrInstall
+cd web/
 bower install
 
 export HADOOP_HOME=/usr/lib/hadoop
