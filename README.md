@@ -38,8 +38,6 @@ export HADOOP_HOME=/usr/lib/hadoop
 export SPARK_HOME=/usr/lib/spark
 export SPARK_CONF_DIR=/usr/lib/spark/conf
 export PATH=$HADOOP_HOME/bin:$PATH
-export HADOOP_CONF_DR=/etc/hadoop/conf
-export $HADOOP_CONF_DIR=/etc/hadoop/conf
 export HADOOP_CONF_DIR=/etc/hadoop/conf
 
 cd ..
