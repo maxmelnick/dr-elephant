@@ -47,7 +47,9 @@ vim ~/dr-elephant/app-conf/elephant.conf
 
 # Make sure ~/dr-elephant/app-conf/Fetcher.conf uses experimental Spark Fetcher that uses REST API for event log
 
-cd dist/dr-elephant-2.1.7
+cd dist
+unzip -q dr-elephant-2.1.7.zip
+cd dr-elephant-2.1.7
 ./bin/start.sh ~/dr-elephant/app-conf
 
 less ~/dr-elephant/dist/logs/elephant/dr_elephant.log
